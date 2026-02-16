@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { storage } from "../api/storage";
 import type { BlogPost } from "../api/storage";
 import { Calendar, ChevronRight } from "lucide-react";
@@ -6,6 +7,7 @@ import { motion } from "framer-motion";
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const data = storage.get<BlogPost[]>("blog_posts") || [];
@@ -163,6 +165,7 @@ const Blog: React.FC = () => {
                 {post.date}
               </div>
               <button
+                onClick={() => navigate(`/blog/${post.id}`)}
                 style={{
                   color: "var(--primary)",
                   fontWeight: "700",

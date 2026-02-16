@@ -39,6 +39,7 @@ const BlogAdmin: React.FC = () => {
           .map((t) => t.trim())
           .filter((t) => t !== ""),
       };
+    } else {
       const newId = `b${Date.now()}`;
       newPosts.unshift({
         id: newId,
@@ -50,6 +51,7 @@ const BlogAdmin: React.FC = () => {
           .split(",")
           .map((t) => t.trim())
           .filter((t) => t !== ""),
+        image: "/images/ai_medicine_black_doctor_1771245971791.png", // Default image for new posts for demo
       });
     }
 

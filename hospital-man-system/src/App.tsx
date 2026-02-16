@@ -14,6 +14,7 @@ import BlogAdmin from "./pages/BlogAdmin";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
+import BlogPostView from "./pages/BlogPostView";
 
 function App() {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Landing />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPostView />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
         </Route>
