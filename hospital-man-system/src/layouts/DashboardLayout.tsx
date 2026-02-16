@@ -9,6 +9,8 @@ import {
   Wifi,
   WifiOff,
   AlertTriangle,
+  X,
+  Menu,
 } from "lucide-react";
 import { storage } from "../api/storage";
 
@@ -18,6 +20,7 @@ const DashboardLayout: React.FC = () => {
   const session = storage.getSession();
   const [isOnline, setIsOnline] = React.useState(true);
   const [showEmergency, setShowEmergency] = React.useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   // Simulate offline/online toggle for demo
   React.useEffect(() => {
@@ -39,6 +42,11 @@ const DashboardLayout: React.FC = () => {
     }
   }, [session, navigate]);
 
+  React.useEffect(() => {
+    // Close sidebar on navigation (mobile)
+    setIsSidebarOpen(false);
+  }, [location]);
+
   if (!session) return null;
 
   const navItems = [
@@ -49,9 +57,23 @@ const DashboardLayout: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div style={{ display: "flex", minHeight: "100vh", position: "relative" }}>
+      {/* Sidebar Overlay (Mobile) */}
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 1999,
+          }}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
+        className={`dashboard-sidebar ${isSidebarOpen ? "open" : ""}`}
         style={{
           width: "260px",
           backgroundColor: "#fff",
@@ -59,6 +81,11 @@ const DashboardLayout: React.FC = () => {
           padding: "1.5rem",
           display: "flex",
           flexDirection: "column",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          zIndex: 2000,
+          transition: "transform 0.3s ease",
         }}
       >
         <div
@@ -67,9 +94,23 @@ const DashboardLayout: React.FC = () => {
             fontWeight: "bold",
             fontSize: "1.25rem",
             color: "var(--primary)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           MediCore AI
+          <button
+            className="mobile-close"
+            onClick={() => setIsSidebarOpen(false)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "var(--text-muted)",
+            }}
+          >
+            <X size={20} />
+          </button>
         </div>
 
         <nav style={{ flex: 1 }}>
@@ -229,19 +270,39 @@ const DashboardLayout: React.FC = () => {
       <main style={{ flex: 1, padding: "2rem", overflowY: "auto" }}>
         <header
           style={{
-            marginBottom: "2rem",
+            padding: "1.5rem 2rem",
+            backgroundColor: "#fff",
+            borderBottom: "1px solid var(--border)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            position: "sticky",
+            top: 0,
+            zIndex: 100,
           }}
         >
-          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-            Hospital Management
-          </h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <button
+              className="mobile-toggle"
+              onClick={() => setIsSidebarOpen(true)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--text-main)",
+                cursor: "pointer",
+              }}
+            >
+              <Menu size={24} />
+            </button>
+            <h1 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
+              Hospital Portal
+            </h1>
+          </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div
+              className="sync-status"
               style={{
-                marginRight: "2rem",
+                marginRight: "1rem",
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
@@ -249,52 +310,79 @@ const DashboardLayout: React.FC = () => {
                 borderRadius: "99px",
                 backgroundColor: isOnline ? "#dcfce7" : "#fee2e2",
                 color: isOnline ? "var(--success)" : "var(--danger)",
-                fontSize: "0.75rem",
+                fontSize: "0.7rem",
                 fontWeight: "700",
               }}
             >
               {isOnline ? <Wifi size={14} /> : <WifiOff size={14} />}
-              {isOnline
-                ? "MALAWI-PRIMARY: SYNCED"
-                : "OFFLINE: LOCAL STORAGE MODE"}
+              <span className="sync-text">
+                {isOnline ? "SYNCED" : "OFFLINE"}
+              </span>
             </div>
-            <div style={{ marginRight: "1rem", textAlign: "right" }}>
-              <div style={{ fontWeight: "500" }}>{session.user.name}</div>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                {session.user.specialization}
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div className="user-info" style={{ textAlign: "right" }}>
+                <div style={{ fontWeight: "700", fontSize: "0.875rem" }}>
+                  {session.user.name}
+                </div>
+                <div
+                  style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}
+                >
+                  {session.user.specialization}
+                </div>
               </div>
-            </div>
-            <div
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                backgroundColor: "#e2e8f0",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: "bold",
-                color: "var(--primary)",
-                overflow: "hidden",
-              }}
-            >
-              {session.user.avatar ? (
-                <img
-                  src={session.user.avatar}
-                  alt={session.user.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              ) : (
-                session.user.name.charAt(4)
-              )}
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  backgroundColor: "#e2e8f0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  color: "var(--primary)",
+                  overflow: "hidden",
+                }}
+              >
+                {session.user.avatar ? (
+                  <img
+                    src={session.user.avatar}
+                    alt={session.user.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  session.user.name.charAt(4)
+                )}
+              </div>
             </div>
           </div>
         </header>
 
-        <section>
+        <section style={{ padding: "2rem" }}>
           <Outlet />
         </section>
       </main>
+
+      <style>{`
+        .mobile-toggle, .mobile-close { display: none; }
+        
+        @media (max-width: 1024px) {
+          .dashboard-sidebar {
+            position: fixed !important;
+            transform: translateX(-100%);
+          }
+          .dashboard-sidebar.open {
+            transform: translateX(0);
+          }
+          .mobile-toggle, .mobile-close { display: block; }
+          .sync-text { display: none; }
+          .user-info { display: none; }
+        }
+      `}</style>
     </div>
   );
 };

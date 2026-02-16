@@ -46,7 +46,7 @@ const About: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
-              fontSize: "3rem",
+              fontSize: "clamp(2rem, 6vw, 3rem)",
               fontWeight: "800",
               marginBottom: "1.5rem",
             }}
@@ -68,8 +68,8 @@ const About: React.FC = () => {
             maxWidth: "1000px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "4rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
             alignItems: "center",
           }}
         >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../api/storage";
 import type { BlogPost } from "../api/storage";
@@ -6,13 +6,10 @@ import { Calendar, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Blog: React.FC = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>(
+    () => storage.get<BlogPost[]>("blog_posts") || [],
+  );
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const data = storage.get<BlogPost[]>("blog_posts") || [];
-    setPosts(data);
-  }, []);
 
   return (
     <div
@@ -26,7 +23,7 @@ const Blog: React.FC = () => {
       <div style={{ textAlign: "center", marginBottom: "4rem" }}>
         <h1
           style={{
-            fontSize: "3rem",
+            fontSize: "clamp(2rem, 6vw, 3rem)",
             fontWeight: "800",
             marginBottom: "1rem",
             background: "linear-gradient(135deg, var(--primary), #6366f1)",

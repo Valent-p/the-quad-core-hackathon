@@ -18,7 +18,7 @@ const Landing: React.FC = () => {
       {/* Hero Section */}
       <section
         style={{
-          padding: "8rem 2rem",
+          padding: "clamp(4rem, 10vw, 8rem) 2rem",
           textAlign: "center",
           backgroundImage:
             "linear-gradient(rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.9)), url('/images/modern_hospital_tech_hero_1771245989203.png')",
@@ -57,7 +57,7 @@ const Landing: React.FC = () => {
           </div>
           <h1
             style={{
-              fontSize: "4rem",
+              fontSize: "clamp(2.5rem, 8vw, 4rem)",
               fontWeight: "850",
               lineHeight: "1.1",
               letterSpacing: "-0.02em",
@@ -71,7 +71,7 @@ const Landing: React.FC = () => {
           </h1>
           <p
             style={{
-              fontSize: "1.25rem",
+              fontSize: "clamp(1rem, 3vw, 1.25rem)",
               color: "var(--text-muted)",
               lineHeight: "1.6",
               marginBottom: "2.5rem",
@@ -83,14 +83,20 @@ const Landing: React.FC = () => {
             seamless patient handling, and integrated productivity tools.
           </p>
           <div
-            style={{ display: "flex", gap: "1rem", justifyContent: "center" }}
+            className="hero-buttons"
+            style={{
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
           >
             <Link
               to="/login"
               style={{
                 backgroundColor: "var(--primary)",
                 color: "#fff",
-                padding: "1rem 2rem",
+                padding: "1rem 2.5rem",
                 borderRadius: "12px",
                 fontWeight: "600",
                 fontSize: "1.1rem",
@@ -159,7 +165,7 @@ const Landing: React.FC = () => {
             maxWidth: "1000px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: "2rem",
           }}
         >
@@ -179,7 +185,7 @@ const Landing: React.FC = () => {
             <div key={i} style={{ textAlign: "center" }}>
               <div
                 style={{
-                  fontSize: "2.5rem",
+                  fontSize: "clamp(2rem, 5vw, 2.5rem)",
                   fontWeight: "800",
                   color: "var(--primary)",
                   marginBottom: "0.5rem",
@@ -205,12 +211,12 @@ const Landing: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section style={{ padding: "6rem 2rem" }}>
+      <section style={{ padding: "clamp(4rem, 8vw, 6rem) 2rem" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <h2
               style={{
-                fontSize: "2.5rem",
+                fontSize: "clamp(2rem, 5vw, 2.5rem)",
                 fontWeight: "800",
                 marginBottom: "1rem",
               }}
@@ -225,7 +231,7 @@ const Landing: React.FC = () => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: "2rem",
             }}
           >
@@ -255,7 +261,7 @@ const Landing: React.FC = () => {
                 key={i}
                 whileHover={{ y: -5 }}
                 style={{
-                  padding: "2.5rem",
+                  padding: "clamp(1.5rem, 4vw, 2.5rem)",
                   backgroundColor: "#fff",
                   borderRadius: "24px",
                   border: "1px solid var(--border)",
@@ -332,7 +338,7 @@ const Landing: React.FC = () => {
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
           <h2
             style={{
-              fontSize: "2.5rem",
+              fontSize: "clamp(2rem, 5vw, 2.5rem)",
               fontWeight: "800",
               marginBottom: "1.5rem",
             }}
@@ -357,12 +363,21 @@ const Landing: React.FC = () => {
               fontSize: "1.1rem",
               alignItems: "center",
               gap: "8px",
+              maxWidth: "100%",
+              justifyContent: "center",
             }}
           >
             Get Started Now <ChevronRight size={20} />
           </Link>
         </div>
       </section>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .hero-buttons { flex-direction: column; width: 100%; }
+          .hero-buttons a { width: 100% !important; justify-content: center; }
+        }
+      `}</style>
     </div>
   );
 };
