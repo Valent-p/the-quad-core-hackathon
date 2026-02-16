@@ -71,9 +71,7 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
 ];
 
 export const initializeMockData = () => {
-  if (!storage.get('doctors')) {
-    storage.set('doctors', MOCK_DOCTORS);
-  }
+  storage.set('doctors', MOCK_DOCTORS);
   // Always refresh patients and blog posts for the demo if requested or if missing
   if (!storage.get('patients')) {
     storage.set('patients', MOCK_PATIENTS);

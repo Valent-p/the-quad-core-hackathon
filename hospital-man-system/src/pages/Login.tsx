@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../api/storage";
+import type { Doctor } from "../api/storage";
 import { motion } from "framer-motion";
 import { Lock, Mail, ChevronRight } from "lucide-react";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("admin@hospital.com");
+  const [email, setEmail] = useState("valentino.phiri@MediCoreAI.com");
   const [password, setPassword] = useState("password");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const doctors = storage.get<any[]>("doctors") || [];
+    const doctors = storage.get<Doctor[]>("doctors") || [];
     const user = doctors.find((d) => d.email === email);
 
     if (user && password === "password") {
@@ -21,7 +22,7 @@ const Login: React.FC = () => {
       navigate("/dashboard");
     } else {
       setError(
-        "Invalid email or password. Hint: admin@hospital.com / password",
+        "Invalid email or password. Hint: Use valentino.phiri@MediCoreAI.com / password",
       );
     }
   };
