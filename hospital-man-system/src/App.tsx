@@ -10,6 +10,10 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Blog from "./pages/Blog";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
+import BlogAdmin from "./pages/BlogAdmin";
+import Login from "./pages/Login";
+import Landing from "./pages/Landing";
+import About from "./pages/About";
 
 function App() {
   useEffect(() => {
@@ -21,24 +25,17 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<Navigate to="/blog" replace />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/blog" element={<Blog />} />
-          <Route
-            path="/about"
-            element={<div style={{ padding: "2rem" }}>About MediCore AI</div>}
-          />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
         </Route>
 
         {/* Dashboard Routes */}
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/patients" element={<Patients />} />
-          <Route
-            path="/blog-admin"
-            element={
-              <div style={{ padding: "2rem" }}>Blog Management Placeholder</div>
-            }
-          />
+          <Route path="/blog-admin" element={<BlogAdmin />} />
           <Route
             path="/settings"
             element={

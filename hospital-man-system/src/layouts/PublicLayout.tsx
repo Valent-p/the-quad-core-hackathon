@@ -1,5 +1,5 @@
-import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import AIAssistant from "../components/AIAssistant";
 
 const PublicLayout: React.FC = () => {
   return (
@@ -29,7 +29,18 @@ const PublicLayout: React.FC = () => {
         <nav>
           <ul style={{ display: "flex", listStyle: "none", gap: "2rem" }}>
             <li>
-              <Link to="/blog" style={{ color: "var(--text-muted)" }}>
+              <Link
+                to="/"
+                style={{ color: "var(--text-muted)", fontWeight: "500" }}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                style={{ color: "var(--text-muted)", fontWeight: "500" }}
+              >
                 Health Blog
               </Link>
             </li>
@@ -59,6 +70,8 @@ const PublicLayout: React.FC = () => {
       <main style={{ flex: 1 }}>
         <Outlet />
       </main>
+
+      <AIAssistant />
 
       <footer
         style={{

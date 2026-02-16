@@ -26,6 +26,11 @@ export const storage = {
   clear: (): void => {
     localStorage.clear();
   },
+
+  // Session management
+  getSession: () => storage.get<{ user: Doctor }>('session'),
+  login: (user: Doctor) => storage.set('session', { user }),
+  logout: () => storage.remove('session'),
 };
 
 // Types for our "database"
@@ -55,4 +60,5 @@ export interface BlogPost {
   authorId: string;
   date: string;
   tags: string[];
+  image?: string;
 }
