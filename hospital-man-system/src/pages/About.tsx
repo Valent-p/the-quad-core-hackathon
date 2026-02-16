@@ -8,25 +8,25 @@ const About: React.FC = () => {
       name: "Valentino Phiri",
       role: "Team Lead & Architecture",
       location: "Malawi, Africa",
-      image: "/images/valentino.jpg",
+      image: "/images/team_avatars_valentino_1771245611599.png",
     },
     {
       name: "Josephy",
       role: "AI Implementation & Strategy",
       location: "Malawi, Africa",
-      image: "/images/josephy.jpg",
+      image: "/images/team_avatars_general_1_1771245630438.png",
     },
     {
       name: "Keith",
       role: "Frontend & UI Design",
       location: "Malawi, Africa",
-      image: "/images/keith.jpg",
+      image: "/images/team_avatars_general_1_1771245630438.png",
     },
     {
       name: "Nkosi",
       role: "Backend & Data Integrity",
       location: "Malawi, Africa",
-      image: "/images/nkosi.jpg",
+      image: "/images/team_avatars_general_1_1771245630438.png",
     },
   ];
 
@@ -207,6 +207,8 @@ const About: React.FC = () => {
                     fontWeight: "800",
                     overflow: "hidden",
                     border: "4px solid var(--primary-light)",
+                    position: "relative", // Added relative positioning
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                   }}
                 >
                   <img
@@ -217,6 +219,8 @@ const About: React.FC = () => {
                       height: "100%",
                       objectFit: "cover",
                       position: "absolute",
+                      top: 0,
+                      left: 0,
                     }}
                     onError={(e) => (e.currentTarget.style.display = "none")}
                   />

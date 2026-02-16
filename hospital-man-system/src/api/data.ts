@@ -7,28 +7,28 @@ const MOCK_DOCTORS: Doctor[] = [
     name: 'Dr. Valentino Phiri',
     specialization: 'Chief of Medicine & AI Research (Malawi)',
     email: 'valentino.phiri@MediCoreAI.com',
-    avatar: '/images/valentino.jpg'
+    avatar: '/images/team_avatars_valentino_1771245611599.png'
   },
   {
     id: 'd2',
     name: 'Dr. Josephy',
     specialization: 'Head of Neurology',
     email: 'josephy@MediCoreAI.com',
-    avatar: '/images/josephy.jpg'
+    avatar: '/images/team_avatars_general_1_1771245630438.png'
   },
   {
     id: 'd3',
     name: 'Dr. Keith',
     specialization: 'Surgical Director',
     email: 'keith@MediCoreAI.com',
-    avatar: '/images/keith.jpg'
+    avatar: '/images/team_avatars_general_1_1771245630438.png'
   },
   {
     id: 'd4',
     name: 'Dr. Nkosi',
     specialization: 'Infectious Diseases Expert',
     email: 'nkosi@MediCoreAI.com',
-    avatar: '/images/nkosi.jpg'
+    avatar: '/images/team_avatars_general_1_1771245630438.png'
   },
 ];
 
@@ -48,7 +48,7 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
     authorId: 'd1',
     date: '2024-02-14',
     tags: ['Heart', 'Health', 'Tips'],
-    image: '/images/heart-blog.jpg'
+    image: '/images/heart_health_african_focus_1771246014358.png'
   },
   {
     id: 'b2',
@@ -57,7 +57,7 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
     authorId: 'd2',
     date: '2024-02-15',
     tags: ['Mental Health', 'Wellness'],
-    image: '/images/stress-blog.jpg'
+    image: '/images/stress_wellness_black_woman_1771245954032.png'
   },
   {
     id: 'b3',
@@ -66,7 +66,7 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
     authorId: 'd1',
     date: '2024-02-16',
     tags: ['Technology', 'AI', 'Future'],
-    image: '/images/ai-blog.jpg'
+    image: '/images/ai_healthcare_african_scientist_future_1771246054347.png'
   },
 ];
 

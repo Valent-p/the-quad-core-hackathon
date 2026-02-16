@@ -21,7 +21,7 @@ const Landing: React.FC = () => {
           padding: "8rem 2rem",
           textAlign: "center",
           backgroundImage:
-            "linear-gradient(rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.9)), url('/images/hero-bg.jpg')",
+            "linear-gradient(rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.9)), url('/images/modern_hospital_tech_hero_1771245989203.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
